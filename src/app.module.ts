@@ -7,6 +7,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
   imports: [
+    PostsModule,
     ConfigModule.forRoot({ isGlobal: true }),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
@@ -18,12 +19,11 @@ import { TypeOrmModule } from '@nestjs/typeorm';
         password: configService.get('DB_PASSWORD'),
         database: configService.get('DB_NAME'),
         synchronize: true,
-        autoLoadEntities: true,
         logging: true,
+        entities: [__dirname + '/**/*.entity{.js, .ts}'],
       }),
       inject: [ConfigService],
     }),
-    PostsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
