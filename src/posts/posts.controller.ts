@@ -17,7 +17,7 @@ import { Post as PostEntity } from './post.entity';
 export class PostsController {
   constructor(private postsService: PostsService) {}
   @Get()
-  getAllPosts(@Query() getPostsDto: GetPostsDto) {
+  getAllPosts(@Query() getPostsDto: GetPostsDto): Promise<PostEntity[]> {
     return this.postsService.getAllPosts(getPostsDto);
   }
   @Get(':id')
